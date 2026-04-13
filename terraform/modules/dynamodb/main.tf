@@ -6,11 +6,14 @@ variable "environment" {
   type    = string
 }
 
+
 resource "aws_dynamodb_table" "findings" {
   name         = "${var.project_name}-findings"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "finding_id"
   range_key    = "timestamp"
+  stream_enabled = true
+  stream_view_type = "NEW_IMAGE"
 
   attribute {
     name = "finding_id"
@@ -51,4 +54,8 @@ output "table_name" {
 
 output "table_arn" {
   value = aws_dynamodb_table.findings.arn
+}
+
+output "stream_arn" {
+  value = aws_dynamodb_table.findings.stream_arn
 }
