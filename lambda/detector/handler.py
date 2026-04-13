@@ -24,6 +24,7 @@ SUSPICIOUS_EVENTS = {
     "PutEventSelectors":         "HIGH",
 }
 
+
 def lambda_handler(event, context):
     detail = event.get("detail", {})
     event_name = detail.get("eventName", "")
@@ -48,4 +49,3 @@ def lambda_handler(event, context):
     print(f"Finding logged: {event_name} | Severity: {severity} | ID: {finding['finding_id']}")
 
     return {"statusCode": 200, "body": json.dumps(finding)}
-
