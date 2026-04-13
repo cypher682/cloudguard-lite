@@ -13,3 +13,16 @@ module "lambda" {
   dynamodb_table_name = module.dynamodb.table_name
   dynamodb_stream_arn = module.dynamodb.stream_arn
 }
+
+module "cloudtrail" {
+  source       = "./modules/cloudtrail"
+  project_name = var.project_name
+  environment  = var.environment
+}
+
+module "eventbridge" {
+  source       = "./modules/eventbridge"
+  project_name = var.project_name
+  environment  = var.environment
+  detector_arn = module.lambda.detector_arn
+}
