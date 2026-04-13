@@ -1,9 +1,9 @@
-import json
 import boto3
 import os
 
 sns = boto3.client("sns")
 SNS_TOPIC_ARN = os.environ["SNS_TOPIC_ARN"]
+
 
 def lambda_handler(event, context):
     for record in event.get("Records", []):
@@ -14,10 +14,10 @@ def lambda_handler(event, context):
 
         finding_id = new_image.get("finding_id", {}).get("S", "unknown")
         event_name = new_image.get("event_name", {}).get("S", "unknown")
-        severity   = new_image.get("severity",   {}).get("S", "unknown")
-        source_ip  = new_image.get("source_ip",  {}).get("S", "unknown")
-        timestamp  = new_image.get("timestamp",  {}).get("S", "unknown")
-        region     = new_image.get("region",     {}).get("S", "unknown")
+        severity = new_image.get("severity",   {}).get("S", "unknown")
+        source_ip = new_image.get("source_ip",  {}).get("S", "unknown")
+        timestamp = new_image.get("timestamp",  {}).get("S", "unknown")
+        region = new_image.get("region",     {}).get("S", "unknown")
 
         subject = f"[CloudGuard] {severity} Alert — {event_name}"
 
