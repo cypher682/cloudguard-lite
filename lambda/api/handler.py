@@ -5,6 +5,7 @@ import os
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table(os.environ["DYNAMODB_TABLE"])
 
+
 def lambda_handler(event, context):
     query_params = event.get("queryStringParameters") or {}
     severity_filter = query_params.get("severity")
