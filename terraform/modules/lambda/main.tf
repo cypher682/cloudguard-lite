@@ -151,4 +151,5 @@ resource "aws_lambda_event_source_mapping" "dynamodb_stream" {
 # ---------- Outputs ----------
 output "detector_arn" { value = aws_lambda_function.detector.arn }
 output "api_arn"      { value = aws_lambda_function.api.arn }
-output "sns_topic_arn" { value = aws_sns_topic.alerts.arn }
+output "sns_topic_arn" { value = aws_sns_topic.alerts.arn } 
+output "api_lambda_name" { value = aws_lambda_function.api.function_name }

@@ -26,3 +26,11 @@ module "eventbridge" {
   environment  = var.environment
   detector_arn = module.lambda.detector_arn
 }
+
+module "api_gateway" {
+  source           = "./modules/api_gateway"
+  project_name     = var.project_name
+  environment      = var.environment
+  api_arn          = module.lambda.api_arn
+  api_lambda_name  = module.lambda.api_lambda_name
+}
